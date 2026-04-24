@@ -1,0 +1,27 @@
+{
+	"name": "leeway",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "tsx src/cli/checkRoute.ts",
+		"build": "tsc",
+		"start": "node dist/cli/checkRoute.js",
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint src/",
+		"lint:fix": "eslint src/ --fix"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@types/node": "^25.6.0",
+		"eslint": "^10.2.1",
+		"tsx": "^4.21.0",
+		"typescript": "^6.0.3",
+		"typescript-eslint": "^8.59.0",
+		"vitest": "^4.1.5"
+	}
+}
