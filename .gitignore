@@ -31,6 +31,4 @@ coverage/
 # data (important decision)
 data/cache/*.json
 
-# OPTIONAL:
-# if GTFS is large, ignore it and require manual download
-# data/gtfs/*
+data/gtfs/*

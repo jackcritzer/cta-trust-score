@@ -14,7 +14,12 @@
 		"skipLibCheck": true,
 		"resolveJsonModule": true,
 		"sourceMap": true,
-		"declaration": false
+		"declaration": false,
+		"paths": {
+			"@/*": [
+				"./src/*"
+			]
+		}
 	},
 	// What to compile
 	"include": [
