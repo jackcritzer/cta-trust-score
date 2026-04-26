@@ -38,3 +38,14 @@ export interface GtfsCalendarDate {
     date: string;
     exceptionType: number;
 }
+
+export interface GtfsStopTime {
+    tripId: string;
+    arrivalTime: string;
+    departureTime: string;
+    stopId: string;
+    stopSequence: number;
+    stopHeadsign: string;
+    pickupType: number;
+    shapeDistTraveled: number | null;
+}

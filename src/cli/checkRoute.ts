@@ -1,22 +1,13 @@
-import {
-    loadStops,
-    loadTrips,
-    loadCalendars,
-    loadCalendarDates
-} from "../data/gtfsLoader.js";
-
-import getActiveServiceIdsForDate from "@/services/activeService.js";
+import { getExpectedService } from "@/services/expectedService.js";
 
 async function main() {
-    const stops = await loadStops();
-    const trips = await loadTrips();
-    const calendars = await loadCalendars();
-    const calendarDates = await loadCalendarDates();
+    const result = await getExpectedService({
+        lineId: "Blue",
+        originStopIds: new Set(["30197", "30198"]),
+        destinationStopIds: new Set(["30374", "30375"]),
+    });
 
-
-    const activeServiceIds = getActiveServiceIdsForDate(calendars, calendarDates)
-
-    console.log(activeServiceIds)
+    console.log(result);
 }
 
 main().catch((error) => {

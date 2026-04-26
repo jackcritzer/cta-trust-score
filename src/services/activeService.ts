@@ -3,17 +3,10 @@ import {
     GtfsCalendarDate,
 } from "@/domain/gtfsTypes";
 
-function parseGtfsDateToNumber(dateStr: string): number {
-    return Number(dateStr); // "20260415" → 20260415
-}
-
-function dateToGtfsNumber(date: Date): number {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-
-    return Number(`${year}${month}${day}`);
-}
+import {
+    toGtfsDateNumber,
+    gtfsDateStringToNumber
+} from "@/utils/gtfsDate"
 
 export default function getActiveServiceIdsForDate(
     calendars: GtfsCalendar[],
@@ -25,13 +18,13 @@ export default function getActiveServiceIdsForDate(
     // find serviceIds from calendar where 'date' is between 'start_date'
     // and 'end_date', and the service is active on that day of the week.
 
-    const today = dateToGtfsNumber(date);
+    const today = toGtfsDateNumber(date);
     const todayString = String(today);
     const day = date.getDay()
 
     let activeServices = calendars.filter(calendar => {
-        const start = parseGtfsDateToNumber(calendar.startDate);
-        const end = parseGtfsDateToNumber(calendar.endDate);
+        const start = gtfsDateStringToNumber(calendar.startDate);
+        const end = gtfsDateStringToNumber(calendar.endDate);
 
         // only check services in timezone
         if (today >= start && today <= end) {

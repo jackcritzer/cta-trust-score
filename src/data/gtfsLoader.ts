@@ -5,7 +5,8 @@ import type {
     GtfsStop,
     GtfsTrip,
     GtfsCalendar,
-    GtfsCalendarDate
+    GtfsCalendarDate,
+    GtfsStopTime
 } from "@/domain/gtfsTypes";
 
 const GTFS_DIR = path.resolve('data', 'gtfs');
@@ -146,4 +147,63 @@ export async function loadCalendarDates(): Promise<GtfsCalendarDate[]> {
     }) as RawGtfsCalendarDate[];
 
     return records.map(mapCalendarDate);
+}
+
+export interface RawGtfsStopTime {
+    trip_id: string;
+    arrival_time: string;
+    departure_time: string;
+    stop_id: string;
+    stop_sequence: number;
+    stop_headsign: string;
+    pickup_type: number;
+    shape_dist_traveled: number | null;
+}
+
+function mapStopTime(row: RawGtfsStopTime): GtfsStopTime {
+    return {
+        tripId: row.trip_id,
+        arrivalTime: row.arrival_time,
+        departureTime: row.departure_time,
+        stopId: row.stop_id,
+        stopSequence: Number(row.stop_sequence),
+        stopHeadsign: row.stop_headsign,
+        pickupType: Number(row.pickup_type),
+        shapeDistTraveled: row.shape_dist_traveled
+            ? Number(row.shape_dist_traveled)
+            : null,
+    };
+}
+
+async function loadStopTimes(): Promise<GtfsStopTime[]> {
+    const filePath = path.join(GTFS_DIR, "stop_times.txt");
+    const fileContents = await readFile(filePath, "utf-8");
+
+    const records = parse(fileContents, {
+        columns: true,
+        skip_empty_lines: true,
+    }) as RawGtfsStopTime[];
+
+    return records.map(mapStopTime);
+}
+
+export async function loadStopTimesByTripId(): Promise<Map<string, GtfsStopTime[]>> {
+    const stopTimes = await loadStopTimes();
+    const stopTimesByTripId = new Map<string, GtfsStopTime[]>();
+
+    for (const stopTime of stopTimes) {
+        const existing = stopTimesByTripId.get(stopTime.tripId);
+
+        if (existing) {
+            existing.push(stopTime);
+        } else {
+            stopTimesByTripId.set(stopTime.tripId, [stopTime]);
+        }
+    }
+
+    for (const tripStopTimes of stopTimesByTripId.values()) {
+        tripStopTimes.sort((a, b) => a.stopSequence - b.stopSequence);
+    }
+
+    return stopTimesByTripId;
 }
