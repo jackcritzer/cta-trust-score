@@ -8,7 +8,7 @@ import {
     gtfsDateStringToNumber
 } from "@/utils/gtfsDate"
 
-export default function getActiveServiceIdsForDate(
+export function getActiveServiceIdsForDate(
     calendars: GtfsCalendar[],
     calendarDates: GtfsCalendarDate[],
     date: Date = new Date()

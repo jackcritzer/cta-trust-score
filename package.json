@@ -9,7 +9,9 @@
 		"start": "node dist/cli/checkRoute.js",
 		"typecheck": "tsc --noEmit",
 		"lint": "eslint src/",
-		"lint:fix": "eslint src/ --fix"
+		"lint:fix": "eslint src/ --fix",
+		"test": "vitest",
+		"test:watch": "vitest --watch"
 	},
 	"keywords": [],
 	"author": "",

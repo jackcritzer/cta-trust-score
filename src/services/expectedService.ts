@@ -2,7 +2,7 @@ import { median } from "@/utils/math.js";
 import { gtfsTimeToSeconds } from "@/utils/gtfsDate.js";
 import { getTripBetweenStops, type TripBetweenStops } from "./tripAnalysis.js";
 import { loadTrips, loadCalendars, loadCalendarDates, loadStopTimesByTripId } from "@/data/gtfsLoader.js";
-import getActiveServiceIdsForDate from "./activeService.js";
+import { getActiveServiceIdsForDate } from "./activeService.js";
 
 function dateToSecondsSinceMidnight(date: Date): number {
     return (
