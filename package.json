@@ -5,6 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "tsx src/cli/checkRoute.ts",
+		"check:route": "tsx src/cli/checkRoute.ts",
+		"check:tracker": "tsx src/cli/checkTrainTracker.ts",
 		"build": "tsc",
 		"start": "node dist/cli/checkRoute.js",
 		"typecheck": "tsc --noEmit",
@@ -19,6 +21,7 @@
 	"type": "commonjs",
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
+		"@types/dotenv": "^6.1.1",
 		"@types/node": "^25.6.0",
 		"eslint": "^10.2.1",
 		"tsx": "^4.21.0",
@@ -27,6 +30,7 @@
 		"vitest": "^4.1.5"
 	},
 	"dependencies": {
-		"csv-parse": "^6.2.1"
+		"csv-parse": "^6.2.1",
+		"dotenv": "^17.4.2"
 	}
 }
