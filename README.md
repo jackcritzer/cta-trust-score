@@ -1,6 +1,6 @@
 # CTA Trust Score
 
-A transit reliability engine that combines scheduled service, live train arrivals, and service alerts to estimate route reliability and generate explainable departure recommendations.
+A transit reliability engine that combines scheduled service and live train arrivals to estimate route reliability and generate explainable departure recommendations.
 
 ## Motivation
 
